@@ -1,0 +1,26 @@
+services:
+  app:
+    image: registry.big.wtf/mediaserver/backend:development
+    build:
+      context: .
+      target: development
+    env_file: .env
+    command: rails s -b 0.0.0.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/rails
+
+  postgresql:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /data
+    ports:
+      - "15432:5432"
+    volumes:
+      - postgresql:/data
+
+volumes:
+  postgresql:
