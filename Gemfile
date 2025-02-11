@@ -2,8 +2,10 @@ source "https://rubygems.org"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
+gem "browser"
 gem "image_processing", "~> 1.2"
 gem "jbuilder"
+gem "jwt"
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 gem "rack-cors"
