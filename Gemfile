@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "aws-sdk-s3", require: false
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
 gem "browser"
