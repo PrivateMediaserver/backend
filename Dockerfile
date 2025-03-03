@@ -13,7 +13,7 @@ ENV RAILS_ENV="development"
 WORKDIR /rails
 
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config curl libjemalloc2 libvips postgresql-client ffmpeg && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config libyaml-dev curl libjemalloc2 libvips postgresql-client ffmpeg && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY Gemfile Gemfile.lock ./
@@ -48,7 +48,7 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config libyaml-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
