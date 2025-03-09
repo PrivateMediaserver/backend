@@ -11,6 +11,13 @@ services:
     volumes:
       - .:/rails
 
+  worker:
+    image: registry.big.wtf/mediaserver/backend:development
+    env_file: .env
+    command: rails solid_queue:start
+    volumes:
+      - .:/rails
+
   postgresql:
     image: postgres:17-alpine
     environment:
