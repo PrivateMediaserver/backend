@@ -26,18 +26,20 @@ class Ffmpeg
   def generate_frames(count = DEFAULT_SCREENSHOT_COUNT)
     Dir.mkdir(directory) unless Dir.exist?(directory)
 
-    fps_value = "fps=#{count.to_f / duration}"
+    fps_value = count.to_f / duration
     output_pattern = File.join(directory, "%03d.png")
 
-    Open3.popen3(
+    command = [
       ffmpeg_path,
       "-hide_banner",
       "-y",
       "-i", @video_path,
-      "-vf", fps_value,
+      "-vf", "fps=#{fps_value}",
       "-frames:v", count.to_s,
       output_pattern
-    )
+    ]
+
+    Open3.popen3(*command) { }
 
     @screenshots = Dir[File.join("/tmp", @uuid, "*.png")].sort
   end
