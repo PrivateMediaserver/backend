@@ -39,8 +39,6 @@ class Ffmpeg
       output_pattern
     )
 
-    Open3.popen3(*command) { }
-
     @screenshots = Dir[File.join("/tmp", @uuid, "*.png")].sort
   end
 
