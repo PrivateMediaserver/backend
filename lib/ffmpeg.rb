@@ -29,7 +29,7 @@ class Ffmpeg
     fps_value = count.to_f / duration
     output_pattern = File.join(directory, "%03d.png")
 
-    command = [
+    Open3.popen3(
       ffmpeg_path,
       "-hide_banner",
       "-y",
@@ -37,7 +37,7 @@ class Ffmpeg
       "-vf", "fps=#{fps_value}",
       "-frames:v", count.to_s,
       output_pattern
-    ]
+    )
 
     Open3.popen3(*command) { }
 
