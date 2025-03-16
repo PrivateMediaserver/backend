@@ -20,7 +20,7 @@ services:
     volumes:
       - .:/rails
     deploy:
-      replicas: 2
+      replicas: 4
 
   postgresql:
     image: postgres:17-alpine
