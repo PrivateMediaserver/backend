@@ -10,6 +10,8 @@ services:
       - "3000:3000"
     volumes:
       - .:/rails
+    deploy:
+      replicas: 1
 
   worker:
     image: registry.big.wtf/mediaserver/backend:development
@@ -17,6 +19,8 @@ services:
     command: rails solid_queue:start
     volumes:
       - .:/rails
+    deploy:
+      replicas: 2
 
   postgresql:
     image: postgres:17-alpine
@@ -28,6 +32,8 @@ services:
       - "15432:5432"
     volumes:
       - postgresql:/data
+    deploy:
+      replicas: 1
 
 volumes:
   postgresql:
