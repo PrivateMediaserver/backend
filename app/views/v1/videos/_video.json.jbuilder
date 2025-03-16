@@ -7,7 +7,7 @@ json.height metadata[:height]
 json.duration metadata[:duration]
 
 if video.preview&.file
-  json.preview polymorphic_url(video.preview.file.variant(:thumb))
+  json.preview polymorphic_url(video.preview.file.variant(full_preview ? :webp : :thumb))
 else
   json.preview nil
 end
