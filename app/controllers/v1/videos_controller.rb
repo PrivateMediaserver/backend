@@ -10,7 +10,7 @@ class V1::VideosController < V1Controller
   end
 
   def screenshots
-    @screenshots = @video.screenshots.with_attached_file
+    @screenshots = @video.screenshots.order(created_at: :asc).with_attached_file
   end
 
   def create
