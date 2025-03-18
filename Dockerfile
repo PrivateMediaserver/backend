@@ -19,6 +19,8 @@ RUN apt-get update -qq && \
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+ENV LD_PRELOAD="libjemalloc.so.2"
+
 
 
 
@@ -69,6 +71,8 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 # Final stage for app image
 FROM base
+
+ENV LD_PRELOAD="libjemalloc.so.2"
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
