@@ -7,7 +7,7 @@ services:
     env_file: .env
     command: rails s -b 0.0.0.0
     ports:
-      - "3000:3000"
+      - "13000:3000"
     volumes:
       - .:/rails
     deploy:
