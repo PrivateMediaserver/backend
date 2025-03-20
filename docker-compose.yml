@@ -5,7 +5,7 @@ services:
       context: .
       target: development
     env_file: .env
-    command: rails s -b 0.0.0.0
+    command: bundle exec rails s -b 0.0.0.0
     ports:
       - "13000:3000"
     volumes:
@@ -16,7 +16,7 @@ services:
   worker:
     image: registry.big.wtf/mediaserver/backend:development
     env_file: .env
-    command: rails solid_queue:start
+    command: bundle exec rails solid_queue:start
     volumes:
       - .:/rails
     deploy:

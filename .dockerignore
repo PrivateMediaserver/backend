@@ -34,3 +34,7 @@
 /.idea
 
 # Custom files
+/.gitattributes
+/.rubocop.yml
+/README.md
+/docker-compose.yml
