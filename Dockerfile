@@ -70,7 +70,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 
 # Final stage for app image
-FROM base
+FROM base AS production
 
 ENV LD_PRELOAD="libjemalloc.so.2"
 

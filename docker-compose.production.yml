@@ -1,0 +1,36 @@
+services:
+  app:
+    image: registry.big.wtf/mediaserver/backend:production
+    build:
+      context: .
+      target: production
+    env_file: .env
+    ports:
+      - "13000:3000"
+    deploy:
+      replicas: 1
+
+  worker:
+    image: registry.big.wtf/mediaserver/backend:production
+    env_file: .env
+    command: bundle exec rails solid_queue:start
+    volumes:
+      - .:/rails
+    deploy:
+      replicas: 4
+
+  postgresql:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /data
+    ports:
+      - "15432:5432"
+    volumes:
+      - postgresql:/data
+    deploy:
+      replicas: 1
+
+volumes:
+  postgresql:
