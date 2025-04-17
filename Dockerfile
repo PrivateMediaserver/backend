@@ -4,7 +4,7 @@
 # docker build -t backend .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name backend backend
 
-ARG RUBY_VERSION=3.4.2
+ARG RUBY_VERSION=3.4.3
 
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS development
 
