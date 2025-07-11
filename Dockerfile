@@ -4,7 +4,7 @@
 # docker build -t backend .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name backend backend
 
-ARG RUBY_VERSION=3.4.3
+ARG RUBY_VERSION=3.4.4
 
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS development
 
@@ -18,8 +18,6 @@ RUN apt-get update -qq && \
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
-
-ENV LD_PRELOAD="libjemalloc.so.2"
 
 
 
@@ -71,8 +69,6 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 # Final stage for app image
 FROM base AS production
-
-ENV LD_PRELOAD="libjemalloc.so.2"
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
