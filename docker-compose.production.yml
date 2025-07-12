@@ -16,8 +16,6 @@ services:
     image: registry.big.wtf/mediaserver/backend:production
     env_file: .env
     command: bundle exec rails solid_queue:start
-    volumes:
-      - .:/rails
     deploy:
       replicas: 4
     depends_on:
