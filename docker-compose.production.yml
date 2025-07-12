@@ -9,6 +9,8 @@ services:
       - "13000:3000"
     deploy:
       replicas: 1
+    depends_on:
+      - postgresql
 
   worker:
     image: registry.big.wtf/mediaserver/backend:production
@@ -18,6 +20,8 @@ services:
       - .:/rails
     deploy:
       replicas: 4
+    depends_on:
+      - postgresql
 
   postgresql:
     image: postgres:17-alpine
