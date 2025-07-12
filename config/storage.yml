@@ -6,3 +6,12 @@ minio:
   bucket: <%= ENV.fetch("MINIO_BUCKET_NAME") %>
   endpoint: <%= ENV.fetch("MINIO_ENDPOINT") %>
   force_path_style: true
+
+hetzner_object_storage:
+  service: S3
+  access_key_id: <%= ENV.fetch("HETZNER_OBJECT_STORAGE_ACCESS_KEY") %>
+  secret_access_key: <%= ENV.fetch("HETZNER_OBJECT_STORAGE_SECRET_KEY") %>
+  region: <%= ENV.fetch("HETZNER_OBJECT_STORAGE_REGION") %>
+  bucket: <%= ENV.fetch("HETZNER_OBJECT_STORAGE_BUCKET_NAME") %>
+  endpoint: <%= ENV.fetch("HETZNER_OBJECT_STORAGE_ENDPOINT") %>
+#  force_path_style: true
