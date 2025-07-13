@@ -37,4 +37,5 @@
 /.gitattributes
 /.rubocop.yml
 /README.md
+/docker-compose.production.yml
 /docker-compose.yml

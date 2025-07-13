@@ -17,7 +17,7 @@ services:
     env_file: .env
     command: bundle exec rails solid_queue:start
     deploy:
-      replicas: 4
+      replicas: 1
     depends_on:
       - postgresql
 
