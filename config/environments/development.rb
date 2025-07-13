@@ -27,7 +27,7 @@ Rails.application.configure do
   config.cache_store = :solid_cache_store
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :minio
+  config.active_storage.service = :hetzner_object_storage
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

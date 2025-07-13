@@ -12,6 +12,8 @@ services:
       - .:/rails
     deploy:
       replicas: 1
+    depends_on:
+      - postgresql
 
   worker:
     image: registry.big.wtf/mediaserver/backend:development
@@ -21,6 +23,8 @@ services:
       - .:/rails
     deploy:
       replicas: 4
+    depends_on:
+      - postgresql
 
   postgresql:
     image: postgres:17-alpine
