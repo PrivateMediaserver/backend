@@ -20,6 +20,6 @@ class Authentication < ApplicationRecord
   end
 
   def nbf
-    updated_at.to_i
+    @nbf ||= updated_at.to_i
   end
 end

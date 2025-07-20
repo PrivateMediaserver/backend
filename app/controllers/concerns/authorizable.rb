@@ -12,7 +12,7 @@ module Authorizable
     end
 
     def payload
-      payload = ApplicationJwt.decode(authorization_token)
+      ApplicationJwt.decode(authorization_token)
     rescue
       nil
     end

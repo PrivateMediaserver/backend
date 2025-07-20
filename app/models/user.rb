@@ -4,5 +4,5 @@ class User < ApplicationRecord
   has_many :collections, dependent: :destroy
   has_many :videos, through: :collections
 
-  normalizes :email, with: ->(email) { email.downcase }
+  normalizes :email, with: -> { it.strip.downcase }
 end
