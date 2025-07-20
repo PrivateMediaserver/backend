@@ -31,6 +31,13 @@ Rails.application.routes.draw do
         put "videos/:id", action: :update
         delete "videos/:id", action: :destroy
       end
+
+      controller :tags do
+        get "tags", action: :index
+        post "tags", action: :create
+        put "tags/:id", action: :update
+        delete "tags/:id", action: :destroy
+      end
     end
   end
 end
