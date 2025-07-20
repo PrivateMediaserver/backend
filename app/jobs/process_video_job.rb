@@ -10,6 +10,8 @@ class ProcessVideoJob < ApplicationJob
 
   def create_screenshots
     @video.file.open do |file|
+      @video.screenshots.destroy_all unless @video.unprocessed?
+
       @video.processing!
 
       ffmpeg = Ffmpeg.new(file.path, @video.id)
