@@ -3,7 +3,12 @@ class V1::VideosController < V1Controller
   before_action :set_video, only: %i[ show screenshots update destroy ]
 
   def index
-    @videos = Current.user.videos.where(videos_query).includes(preview: [ :file_attachment, :file_blob ])
+    @videos = Current.user.videos
+                     .with_attached_file
+                     .where(videos_query)
+                     .includes(
+                       preview: { file_attachment: :blob }
+                     )
   end
 
   def show
