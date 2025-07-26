@@ -17,7 +17,7 @@ class V1::TagsController < V1Controller
   end
 
   def update
-    if @video.update(tag_params)
+    if @tag.update(tag_params)
       render :show, status: :ok
     else
       render json: { status: 422, error: "Unprocessable Content", fields: @tag.errors }, status: :unprocessable_content
@@ -25,7 +25,7 @@ class V1::TagsController < V1Controller
   end
 
   def destroy
-    @video.destroy!
+    @tag.destroy!
   end
 
   private

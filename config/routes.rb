@@ -15,14 +15,6 @@ Rails.application.routes.draw do
         get "user", action: :show
       end
 
-      controller :collections do
-        get "collections", action: :index
-        post "collections", action: :create
-        get "collections/:id", action: :show
-        put "collections/:id", action: :update
-        delete "collections/:id", action: :destroy
-      end
-
       controller :videos do
         get "videos", action: :index
         post "videos", action: :create
@@ -30,6 +22,14 @@ Rails.application.routes.draw do
         get "videos/:id/screenshots", action: :screenshots
         put "videos/:id", action: :update
         delete "videos/:id", action: :destroy
+      end
+
+      controller :people do
+        get "people", action: :index
+        post "people", action: :create
+        get "people/:id", action: :show
+        put "people/:id", action: :update
+        delete "people/:id", action: :destroy
       end
 
       controller :tags do
