@@ -15,14 +15,6 @@ Rails.application.routes.draw do
         get "user", action: :show
       end
 
-      controller :collections do
-        get "collections", action: :index
-        post "collections", action: :create
-        get "collections/:id", action: :show
-        put "collections/:id", action: :update
-        delete "collections/:id", action: :destroy
-      end
-
       controller :videos do
         get "videos", action: :index
         post "videos", action: :create

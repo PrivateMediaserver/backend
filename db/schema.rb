@@ -53,14 +53,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_13_172557) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_collections_on_user_id"
-  end
-
   create_table "screenshots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.boolean "main", default: false, null: false
@@ -97,21 +89,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_13_172557) do
   end
 
   create_table "videos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "collection_id", null: false
     t.string "name", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["collection_id"], name: "index_videos_on_collection_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "authentications", "users"
-  add_foreign_key "collections", "users"
   add_foreign_key "screenshots", "videos"
   add_foreign_key "tags", "users"
   add_foreign_key "video_tags", "tags"
   add_foreign_key "video_tags", "videos"
-  add_foreign_key "videos", "collections"
 end
