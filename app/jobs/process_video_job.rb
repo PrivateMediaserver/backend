@@ -1,5 +1,5 @@
 class ProcessVideoJob < ApplicationJob
-  queue_as :default
+  queue_as :low
 
   def perform(id)
     @video = Video.find(id)

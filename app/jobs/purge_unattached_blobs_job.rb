@@ -1,5 +1,5 @@
 class PurgeUnattachedBlobsJob < ApplicationJob
-  queue_as :default
+  queue_as :low
 
   def perform
     ActiveStorage::Blob.unattached.where(created_at: ..2.days.ago).find_each(&:purge_later)
