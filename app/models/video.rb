@@ -1,5 +1,6 @@
 class Video < ApplicationRecord
   has_one_attached :file
+  belongs_to :user
   has_many :screenshots, dependent: :destroy
   has_one :preview, -> { where(main: true) }, class_name: "Screenshot"
   has_many :video_people, dependent: :destroy
