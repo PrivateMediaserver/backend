@@ -4,6 +4,7 @@ class V1::VideosController < V1Controller
 
   def index
     @videos = Current.user.videos
+                     .where(videos_query)
                      .with_attached_file
                      .includes(
                        preview: { file_attachment: :blob }
@@ -41,6 +42,10 @@ class V1::VideosController < V1Controller
   end
 
   private
+
+  def videos_query
+    params.permit(:person_id)
+  end
 
   def set_video
     @video = Current.user.videos.find(params.expect(:id))
