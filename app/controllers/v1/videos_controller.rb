@@ -4,11 +4,18 @@ class V1::VideosController < V1Controller
 
   def index
     @videos = Current.user.videos
-                     .where(videos_query)
-                     .with_attached_file
-                     .includes(
-                       preview: { file_attachment: :blob }
-                     )
+
+    if videos_query[:people_ids].present?
+      @videos = @videos.joins(video_people: :person)
+                       .where(people: { id: videos_query[:people_ids] })
+    end
+
+    if videos_query[:tag_ids].present?
+      @videos = @videos.joins(video_tags: :tags)
+                       .where(tags: { id: videos_query[:tag_ids] })
+    end
+
+    @videos.distinct
   end
 
   def show
@@ -44,7 +51,7 @@ class V1::VideosController < V1Controller
   private
 
   def videos_query
-    params.permit(:person_id)
+    params.permit(people_ids: [], tag_ids: [])
   end
 
   def set_video
