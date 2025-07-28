@@ -19,5 +19,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 group :development, :test do
   gem "brakeman", require: false
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+end
+
+group :development do
   gem "rubocop-rails-omakase", require: false
 end
