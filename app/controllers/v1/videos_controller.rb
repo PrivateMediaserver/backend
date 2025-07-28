@@ -15,7 +15,10 @@ class V1::VideosController < V1Controller
                        .where(tags: { id: videos_query[:tag_ids] })
     end
 
-    @videos.distinct
+    @videos.with_attached_file
+           .includes(
+             preview: { file_attachment: :blob }
+           )
   end
 
   def show
