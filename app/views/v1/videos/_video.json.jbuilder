@@ -13,7 +13,7 @@ else
 end
 
 if video.preview&.file
-  json.preview polymorphic_url(video.preview.file.variant(full_preview ? :webp : :thumb))
+  json.preview polymorphic_url(video.preview.file.variant(full_preview ? :avif : :thumb))
 else
   json.preview nil
 end
