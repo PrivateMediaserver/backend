@@ -1,24 +1,28 @@
 class V1::VideosController < V1Controller
+  include Paginable
+
   before_action :authorize
   before_action :set_video, only: %i[ show screenshots update destroy ]
 
   def index
-    @videos = Current.user.videos
+    videos = Current.user.videos
 
     if videos_query[:people_ids].present?
-      @videos = @videos.joins(video_people: :person)
+      videos = videos.joins(video_people: :person)
                        .where(people: { id: videos_query[:people_ids] })
     end
 
     if videos_query[:tag_ids].present?
-      @videos = @videos.joins(video_tags: :tags)
+      videos = videos.joins(video_tags: :tags)
                        .where(tags: { id: videos_query[:tag_ids] })
     end
 
-    @videos.with_attached_file
-           .includes(
-             preview: { file_attachment: :blob }
-           )
+    videos = videos.with_attached_file
+                   .includes(
+                     preview: { file_attachment: :blob }
+                   )
+
+    @pagination, @videos = paginate(videos)
   end
 
   def show

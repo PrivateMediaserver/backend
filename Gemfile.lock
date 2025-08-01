@@ -169,6 +169,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
+    pagy (9.3.5)
     parallel (1.27.0)
     parser (3.3.9.0)
       ast (~> 2.4.1)
@@ -310,6 +311,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jwt
+  pagy
   pg (~> 1.1)
   puma (>= 5.0)
   rack-cors
