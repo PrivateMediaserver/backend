@@ -8,7 +8,7 @@ module Paginable
   private
 
   def paginate(collection)
-    pagination, records = pagy(collection)
+    pagination, records = pagy(collection, { page: current_page, limit: current_limit })
 
     [ pagination, records ]
   end
@@ -17,7 +17,7 @@ module Paginable
     params[:page]&.to_i || 1
   end
 
-  def per_page
+  def current_limit
     params[:per_page]&.to_i || 25
   end
 end
