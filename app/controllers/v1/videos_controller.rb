@@ -5,7 +5,7 @@ class V1::VideosController < V1Controller
   before_action :set_video, only: %i[ show screenshots update destroy ]
 
   def index
-    videos = Current.user.videos
+    videos = Current.user.videos.processed
 
     if videos_query[:people_ids].present?
       videos = videos.joins(video_people: :person)
