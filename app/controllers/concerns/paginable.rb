@@ -8,9 +8,7 @@ module Paginable
   private
 
   def paginate(collection)
-    pagination, records = pagy(collection, page: current_page, limit: current_limit)
-
-    [ pagination, records ]
+    pagy(collection, page: current_page, limit: current_limit)
   end
 
   def current_page

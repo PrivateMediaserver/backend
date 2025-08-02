@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_26_214509) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -88,6 +88,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_26_214509) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "video_fragments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "video_id", null: false
+    t.integer "sequence_number", null: false
+    t.float "duration", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_id", "sequence_number"], name: "index_video_fragments_on_video_id_and_sequence_number", unique: true
+    t.index ["video_id"], name: "index_video_fragments_on_video_id"
+  end
+
   create_table "video_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.uuid "person_id", null: false
@@ -110,6 +120,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_26_214509) do
   create_table "videos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name", null: false
+    t.jsonb "headers"
+    t.float "duration"
+    t.integer "width"
+    t.integer "height"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -122,6 +136,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_26_214509) do
   add_foreign_key "people", "users"
   add_foreign_key "screenshots", "videos"
   add_foreign_key "tags", "users"
+  add_foreign_key "video_fragments", "videos"
   add_foreign_key "video_people", "people"
   add_foreign_key "video_people", "videos"
   add_foreign_key "video_tags", "tags"

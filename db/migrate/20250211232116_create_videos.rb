@@ -3,6 +3,10 @@ class CreateVideos < ActiveRecord::Migration[8.0]
     create_table :videos, id: :uuid do |t|
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.string :name, null: false
+      t.jsonb :headers
+      t.float :duration
+      t.integer :width
+      t.integer :height
       t.integer :status, null: false, default: Video.statuses[:unprocessed]
 
       t.timestamps

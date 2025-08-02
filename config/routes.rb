@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         get "videos", action: :index
         post "videos", action: :create
         get "videos/:id", action: :show
+        get "videos/:id/playlist", action: :playlist, as: :videos_video_playlist
         get "videos/:id/screenshots", action: :screenshots
         put "videos/:id", action: :update
         delete "videos/:id", action: :destroy
