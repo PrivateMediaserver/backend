@@ -1,8 +1,8 @@
 class Screenshot < ApplicationRecord
   belongs_to :video
   has_one_attached :file do |attachable|
-    attachable.variant :avif, format: :avif
-    attachable.variant :thumb, resize_to_limit: [ 480, 480 ], format: :avif
+    attachable.variant :webp, format: :webp
+    attachable.variant :thumb, resize_to_limit: [ 480, 480 ], format: :webp
   end
 
   validates :main, uniqueness: { scope: :video_id }, if: -> { main? }
