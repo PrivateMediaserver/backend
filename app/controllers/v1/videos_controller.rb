@@ -2,7 +2,7 @@ class V1::VideosController < V1Controller
   include Paginable
 
   before_action :authorize, except:  %i[ playlist ]
-  before_action :set_video, only: %i[ show screenshots update destroy ]
+  before_action :set_video, only: %i[ show screenshots update update_preview destroy ]
 
   def index
     videos = Current.user.videos.processed
@@ -53,7 +53,7 @@ class V1::VideosController < V1Controller
   end
 
   def create
-    @video = Current.user.videos.new(video_params)
+    @video = Current.user.videos.new(create_video_params)
 
     if @video.save
       ProcessVideoJob.perform_later(@video.id)
@@ -64,10 +64,21 @@ class V1::VideosController < V1Controller
   end
 
   def update
-    if @video.update(video_params)
+    if @video.update(update_video_params)
       render :show, status: :ok
     else
       render json: { status: 422, error: "Unprocessable Content", fields: @video.errors }, status: :unprocessable_content
+    end
+  end
+
+  def update_preview
+    new_preview = @video.screenshots.find(params.expect(:preview_id))
+
+    if new_preview.update(main: true)
+      @screenshots = @video.screenshots.order(created_at: :asc)
+      render :screenshots, status: :ok
+    else
+      render json: { status: 422, error: "Unprocessable Content", fields: new_preview.errors }, status: :unprocessable_content
     end
   end
 
@@ -85,7 +96,11 @@ class V1::VideosController < V1Controller
     @video = Current.user.videos.find(params.expect(:id))
   end
 
-  def video_params
+  def create_video_params
     params.expect(video: [ :name, :file ])
+  end
+
+  def update_video_params
+    params.expect(video: [ :name ])
   end
 end

@@ -21,7 +21,8 @@ Rails.application.routes.draw do
         get "videos/:id", action: :show
         get "videos/:id/playlist", action: :playlist, as: :videos_video_playlist
         get "videos/:id/screenshots", action: :screenshots
-        put "videos/:id", action: :update
+        patch "videos/:id", action: :update
+        put "videos/:id/preview", action: :update_preview
         delete "videos/:id", action: :destroy
       end
 
@@ -29,14 +30,14 @@ Rails.application.routes.draw do
         get "people", action: :index
         post "people", action: :create
         get "people/:id", action: :show
-        put "people/:id", action: :update
+        patch "people/:id", action: :update
         delete "people/:id", action: :destroy
       end
 
       controller :tags do
         get "tags", action: :index
         post "tags", action: :create
-        put "tags/:id", action: :update
+        patch "tags/:id", action: :update
         delete "tags/:id", action: :destroy
       end
     end
