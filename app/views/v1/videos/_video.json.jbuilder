@@ -1,11 +1,12 @@
 json.extract! video, :id, :name, :duration, :width, :height, :status, :created_at, :updated_at
 
-if video.preview&.file
-  json.preview polymorphic_url(video.preview.file.variant(full_preview ? :webp : :thumb))
-else
-  json.preview nil
+json.preview polymorphic_url(video.preview.file.variant(:webp))
+json.file playlist
+
+json.tags do
+  json.array! video.tags, partial: "v1/tags/tag", as: :tag
 end
 
-if with_file
-  json.file @playlist
+json.people do
+  json.array! video.people, partial: "v1/people/person", as: :person
 end
