@@ -101,6 +101,6 @@ class V1::VideosController < V1Controller
   end
 
   def update_video_params
-    params.expect(video: [ :name ])
+    params.expect(video: [ :name, person_ids: [], tag_ids: [] ])
   end
 end
