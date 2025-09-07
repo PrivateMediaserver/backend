@@ -1,9 +1,12 @@
 class V1::TagsController < V1Controller
   before_action :authorize
-  before_action :set_tag, only: [ :update, :destroy ]
+  before_action :set_tag, only: [ :show, :update, :destroy ]
 
   def index
-    @tags = Current.user.tags
+    @tags = Current.user.tags.order(name: :asc)
+  end
+
+  def show
   end
 
   def create

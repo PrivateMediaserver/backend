@@ -5,5 +5,5 @@ class Tag < ApplicationRecord
 
   normalizes :name, with: -> { it.strip }
 
-  validates :name, uniqueness: { scope: :user_id, case_sensitive: false }
+  validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }
 end

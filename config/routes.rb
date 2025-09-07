@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       controller :tags do
         get "tags", action: :index
         post "tags", action: :create
+        get "tags/:id", action: :show
         patch "tags/:id", action: :update
         delete "tags/:id", action: :destroy
       end
