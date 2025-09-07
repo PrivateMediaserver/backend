@@ -13,7 +13,7 @@ class V1::VideosController < V1Controller
     end
 
     if videos_query[:tag_ids].present?
-      videos = videos.joins(video_tags: :tags)
+      videos = videos.joins(video_tags: :tag)
                        .where(tags: { id: videos_query[:tag_ids] })
     end
 
