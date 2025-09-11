@@ -91,7 +91,7 @@ class V1::VideosController < V1Controller
 
   def update_progress
     if @video.update(update_video_progress)
-      render json: { progress: @video.progress }, status: :ok
+      render json: { progress: @video.progress, viewed: @video.viewed }, status: :ok
     else
       render json: { status: 422, error: "Unprocessable Content", fields: @video.errors }, status: :unprocessable_content
     end
