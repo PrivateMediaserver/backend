@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         get "videos/:id/screenshots", action: :screenshots
         patch "videos/:id", action: :update
         put "videos/:id/preview", action: :update_preview
+        put "videos/:id/progress", action: :update_progress
         delete "videos/:id", action: :destroy
       end
 

@@ -2,7 +2,7 @@ class V1::VideosController < V1Controller
   include Paginable
 
   before_action :authorize, except:  %i[ playlist ]
-  before_action :set_video, only: %i[ show screenshots update update_preview destroy ]
+  before_action :set_video, only: %i[ show screenshots update update_preview update_progress destroy ]
 
   def index
     videos = Current.user.videos.processed
@@ -89,6 +89,14 @@ class V1::VideosController < V1Controller
     end
   end
 
+  def update_progress
+    if @video.update(update_video_progress)
+      render json: { progress: @video.progress }, status: :ok
+    else
+      render json: { status: 422, error: "Unprocessable Content", fields: @video.errors }, status: :unprocessable_content
+    end
+  end
+
   def destroy
     @video.destroy!
   end
@@ -109,5 +117,9 @@ class V1::VideosController < V1Controller
 
   def update_video_params
     params.expect(video: [ :name, person_ids: [], tag_ids: [] ])
+  end
+
+  def update_video_progress
+    params.expect(video: [ :progress ])
   end
 end
