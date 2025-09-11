@@ -14,6 +14,4 @@ class Video < ApplicationRecord
   generates_token_for :playlist, expires_in: 1.minute do
     updated_at
   end
-
-  default_scope { order(created_at: :asc) }
 end

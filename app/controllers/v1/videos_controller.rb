@@ -17,7 +17,8 @@ class V1::VideosController < V1Controller
                        .where(tags: { id: videos_query[:tag_ids] })
     end
 
-    videos = videos.with_attached_file
+    videos = videos.order(created_at: :desc)
+                   .with_attached_file
                    .includes(
                      preview: { file_attachment: :blob }
                    )
@@ -27,6 +28,12 @@ class V1::VideosController < V1Controller
 
   def show
     @playlist = v1_videos_video_playlist_url(@video, params: { key: @video.generate_token_for(:playlist) })
+  end
+
+  def random_id
+    id = Current.user.videos.order("RANDOM()").limit(1).pluck(:id).first
+
+    render json: { id: }
   end
 
   def playlist

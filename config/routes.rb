@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       controller :videos do
         get "videos", action: :index
         post "videos", action: :create
+        get "videos/random_id", action: :random_id
         get "videos/:id", action: :show
         get "videos/:id/playlist", action: :playlist, as: :videos_video_playlist
         get "videos/:id/screenshots", action: :screenshots
