@@ -11,11 +11,21 @@ class Video < ApplicationRecord
 
   enum :status, unprocessed: 0, processing: 1, processed: 2
 
+  validates :name, presence: true
+
+  before_update :normalize_progress
+
   generates_token_for :playlist, expires_in: 1.minute do
     updated_at
   end
 
   def viewed
-    (progress / duration * 100) > 85
+    (progress / duration * 100) >= 90
+  end
+
+  private
+
+  def normalize_progress
+    self.progress = duration if progress_changed? && viewed
   end
 end
