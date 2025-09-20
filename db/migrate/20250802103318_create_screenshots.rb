@@ -1,6 +1,6 @@
 class CreateScreenshots < ActiveRecord::Migration[8.0]
   def change
-    create_table :screenshots, id: :uuid do |t|
+    create_table :screenshots, id: :uuid, default: -> { "uuidv7()" } do |t|
       t.references :video, null: false, foreign_key: true, type: :uuid
       t.boolean :main, null: false, default: false
 

@@ -1,6 +1,6 @@
 class CreatePeople < ActiveRecord::Migration[8.0]
   def change
-    create_table :people, id: :uuid do |t|
+    create_table :people, id: :uuid, default: -> { "uuidv7()" } do |t|
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.string :name
 

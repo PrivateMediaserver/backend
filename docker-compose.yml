@@ -27,7 +27,7 @@ services:
       - postgresql
 
   postgresql:
-    image: postgres:17-alpine
+    image: postgres:18rc1
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password

@@ -14,7 +14,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.uuid "record_id", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -36,13 +36,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "authentications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "authentications", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "refresh_uuid", null: false
     t.integer "status", default: 1, null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "people", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
-  create_table "screenshots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "screenshots", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.boolean "main", default: false, null: false
     t.datetime "created_at", null: false
@@ -71,7 +71,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["video_id"], name: "index_screenshots_on_video_id_main_true", unique: true, where: "(main = true)"
   end
 
-  create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "tags", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -80,7 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "video_fragments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "video_fragments", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.integer "sequence_number", null: false
     t.float "duration", null: false
@@ -98,7 +98,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["video_id"], name: "index_video_fragments_on_video_id"
   end
 
-  create_table "video_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "video_people", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.uuid "person_id", null: false
     t.datetime "created_at", null: false
@@ -108,7 +108,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["video_id"], name: "index_video_people_on_video_id"
   end
 
-  create_table "video_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "video_tags", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.uuid "tag_id", null: false
     t.datetime "created_at", null: false
@@ -117,7 +117,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_103547) do
     t.index ["video_id"], name: "index_video_tags_on_video_id"
   end
 
-  create_table "videos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "videos", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name", null: false
     t.jsonb "headers"
