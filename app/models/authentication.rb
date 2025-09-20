@@ -10,7 +10,7 @@ class Authentication < ApplicationRecord
   end
 
   def refresh_token
-    ApplicationJwt.encode({ sub: refresh_uuid  }, nbf + 30.days)
+    ApplicationJwt.encode({ sub: refresh_uuid  }, nbf + 6.hour)
   end
 
   private
