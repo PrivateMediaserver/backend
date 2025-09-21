@@ -3,7 +3,7 @@ class V1::PeopleController < V1Controller
   before_action :set_person, only: [ :show, :update, :destroy ]
 
   def index
-    @people = Current.user.people
+    @people = Current.user.people.order(name: :asc)
   end
 
   def show
