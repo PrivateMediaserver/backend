@@ -11,7 +11,7 @@ gem "pagy"
 gem "pg", "~> 1.6"
 gem "puma", ">= 5.0"
 gem "rack-cors"
-gem "rails", "~> 8.0.2"
+gem "rails", "~> 8.0.3"
 gem "solid_cache"
 gem "solid_queue"
 gem "thruster", require: false
