@@ -31,11 +31,11 @@ module Ffmpeg
     private
 
     def duration
-      info.dig(:streams, 0, :duration).to_f
+      info.dig(:duration).to_f
     end
 
     def info
-      @info ||= Ffmpeg::Info.new(@storage).show
+      @info ||= Ffmpeg::Info.new(@storage).video_stream
     end
 
     class << self
