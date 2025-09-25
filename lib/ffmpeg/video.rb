@@ -7,15 +7,15 @@ module Ffmpeg
     end
 
     def duration
-      info.dig(:streams, 0, :duration).to_f
+      info&.dig(:duration).to_f
     end
 
     def width
-      info.dig(:streams, 0, :width).to_i
+      info&.dig(:width).to_i
     end
 
     def height
-      info.dig(:streams, 0, :height).to_i
+      info&.dig(:height).to_i
     end
 
     def generate_hls
@@ -35,7 +35,7 @@ module Ffmpeg
     private
 
     def info
-      @info ||= Ffmpeg::Info.new(@storage).show
+      @info ||= Ffmpeg::Info.new(@storage).video_stream
     end
   end
 end

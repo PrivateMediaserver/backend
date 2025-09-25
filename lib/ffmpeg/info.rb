@@ -6,7 +6,13 @@ module Ffmpeg
       @storage = storage
     end
 
-    def show
+    def video_stream
+      streams[:streams].find { |s| s[:codec_type] == "video" }
+    end
+
+    private
+
+    def streams
       return @info if @info
 
       command = [
