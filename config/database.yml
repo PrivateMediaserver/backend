@@ -12,29 +12,29 @@ default: &default
 development:
   primary: &primary_development
     <<: *default
-    database: backend_development
+    database: mediaserver_development
   cache:
     <<: *primary_development
-    database: backend_development_cache
+    database: mediaserver_development_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_development
-    database: backend_development_queue
+    database: mediaserver_development_queue
     migrations_paths: db/queue_migrate
 
 test:
   <<: *default
-  database: backend_test
+  database: mediaserver_test
 
 production:
   primary: &primary_production
     <<: *default
-    database: backend_production
+    database: mediaserver_production
   cache:
     <<: *primary_production
-    database: backend_production_cache
+    database: mediaserver_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: backend_production_queue
+    database: mediaserver_production_queue
     migrations_paths: db/queue_migrate
