@@ -23,6 +23,14 @@ class Video < ApplicationRecord
     (progress / duration * 100) >= 90
   end
 
+  def self.random_for_user(user)
+    relation = user.videos.where("progress < duration")
+    count = relation.count
+    return nil if count.zero?
+
+    relation.offset(rand(count)).limit(1).pick(:id)
+  end
+
   private
 
   def normalize_progress
