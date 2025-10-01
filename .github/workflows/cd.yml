@@ -3,7 +3,7 @@ name: CD
 on:
   push:
     branches: [ main ]
-  repository_dispatch:
+  workflow_dispatch:
 
 concurrency:
   group: cd-${{ github.ref }}
