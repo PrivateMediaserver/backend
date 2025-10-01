@@ -1,13 +1,13 @@
 name: CI
 
 on:
-#  push:
-#    branches: [ main ]
+  push:
+    branches: [ main ]
   repository_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, arm64]
     steps:
       -
         name: Login to Registry
