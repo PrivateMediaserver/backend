@@ -31,3 +31,14 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: ${{ vars.DOCKER_REGISTRY }}/mediaserver/backend:production
+
+  update:
+    runs-on: [self-hosted, linux, arm64]
+    needs: build
+    steps:
+      -
+        name: Send update request to server
+        env:
+          DEPLOYMENT_UPDATE_URL: ${{ vars.DEPLOYMENT_UPDATE_URL }}
+        run: |
+          curl -X POST "DEPLOYMENT_UPDATE_URL"
