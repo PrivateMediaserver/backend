@@ -31,7 +31,7 @@ class V1::VideosController < V1Controller
   end
 
   def random_id
-    id = Current.user.videos.order("RANDOM()").limit(1).pluck(:id).first
+    id = Current.user.videos.where("progress < duration").order("RANDOM()").limit(1).pluck(:id).first
 
     render json: { id: }
   end
