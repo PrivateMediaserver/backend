@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   repository_dispatch:
 
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: [self-hosted, linux, arm64]
