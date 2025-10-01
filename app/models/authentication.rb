@@ -6,11 +6,11 @@ class Authentication < ApplicationRecord
   before_create :set_refresh_uuid
 
   def access_token
-    ApplicationJwt.encode({ sub: user_id, jti: id  }, nbf + 5.minutes)
+    ApplicationJwt.encode({ sub: user_id, jti: id  }, nbf + 5.minutes.to_i)
   end
 
   def refresh_token
-    ApplicationJwt.encode({ sub: refresh_uuid  }, nbf + 6.hour)
+    ApplicationJwt.encode({ sub: refresh_uuid  }, nbf + 6.hour.to_i)
   end
 
   private
@@ -20,6 +20,6 @@ class Authentication < ApplicationRecord
   end
 
   def nbf
-    @nbf ||= updated_at.to_i
+    updated_at.to_i
   end
 end
