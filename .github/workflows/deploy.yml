@@ -41,4 +41,4 @@ jobs:
         env:
           DEPLOYMENT_UPDATE_URL: ${{ vars.DEPLOYMENT_UPDATE_URL }}
         run: |
-          curl -X POST "DEPLOYMENT_UPDATE_URL"
+          curl -X POST "$DEPLOYMENT_UPDATE_URL"
