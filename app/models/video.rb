@@ -28,7 +28,7 @@ class Video < ApplicationRecord
     count = relation.count
     return nil if count.zero?
 
-    relation.offset(rand(count)).limit(1).first
+    relation.offset(rand(count)).first
   end
 
   private
