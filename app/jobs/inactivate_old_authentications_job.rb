@@ -1,5 +1,5 @@
 class InactivateOldAuthenticationsJob < ApplicationJob
-  queue_as :medium
+  queue_as :low
 
   def perform
     authentications.find_each(&:expired!)
