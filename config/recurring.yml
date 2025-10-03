@@ -14,9 +14,17 @@ development:
     class: PurgeUnattachedBlobsJob
     queue: default
     schedule: at 3am every day
+  periodic_authentication_cleanup:
+    class: InactivateOldAuthenticationsJob
+    queue: default
+    schedule: every hour
 
 production:
   periodic_cleanup:
     class: PurgeUnattachedBlobsJob
     queue: default
     schedule: at 3am every day
+  periodic_authentication_cleanup:
+    class: InactivateOldAuthenticationsJob
+    queue: default
+    schedule: every hour
