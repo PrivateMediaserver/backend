@@ -1,7 +1,7 @@
 class Authentication < ApplicationRecord
   belongs_to :user
 
-  enum :status, inactive: 0, active: 1, revoked: 10
+  enum :status, inactive: 0, active: 1, revoked: 10, expired: 11
 
   before_create :set_refresh_uuid
 
