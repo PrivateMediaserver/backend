@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "https://gem.coop"
 
 gem "aws-sdk-s3", require: false
 gem "bcrypt", "~> 3.1.7"
