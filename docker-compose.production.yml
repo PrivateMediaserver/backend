@@ -22,7 +22,7 @@ services:
       - postgresql
 
   postgresql:
-    image: postgres:18rc1
+    image: postgres:18
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
