@@ -1,4 +1,4 @@
-class CreateVideoFragments < ActiveRecord::Migration[8.0]
+class CreateVideoFragments < ActiveRecord::Migration[8.1]
   def change
     create_table :video_fragments, id: :uuid, default: -> { "uuidv7()" } do |t|
       t.references :video, null: false, foreign_key: true, type: :uuid

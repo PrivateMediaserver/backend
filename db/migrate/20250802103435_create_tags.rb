@@ -1,4 +1,4 @@
-class CreateTags < ActiveRecord::Migration[8.0]
+class CreateTags < ActiveRecord::Migration[8.1]
   def change
     create_table :tags, id: :uuid, default: -> { "uuidv7()" } do |t|
       t.references :user, null: false, foreign_key: true, type: :uuid
