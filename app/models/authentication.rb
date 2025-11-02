@@ -15,7 +15,7 @@ class Authentication < ApplicationRecord
 
   private
 
-  def set_refresh_uuid
+  def set_initial_params
     self.refresh_uuid = SecureRandom.uuid_v7
     self.last_active_at = Time.now
   end
