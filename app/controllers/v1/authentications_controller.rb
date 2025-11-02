@@ -20,7 +20,7 @@ class V1::AuthenticationsController < V1Controller
 
   def refresh
     if @authentication
-      @authentication.update(refresh_uuid: SecureRandom.uuid_v7, user_agent:)
+      @authentication.update(refresh_uuid: SecureRandom.uuid_v7, user_agent:, last_active_at: Time.now)
       render :create, status: :created
     else
       render json: { status: 401, error: "Unauthorized" }, status: :unauthorized unless @authentication

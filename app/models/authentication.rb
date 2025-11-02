@@ -3,7 +3,7 @@ class Authentication < ApplicationRecord
 
   enum :status, inactive: 0, active: 1, revoked: 10, expired: 11
 
-  before_create :set_refresh_uuid
+  before_create :set_initial_params
 
   def access_token
     ApplicationJwt.encode({ sub: user_id, jti: id }, nbf + 5.minutes.to_i)
@@ -17,6 +17,7 @@ class Authentication < ApplicationRecord
 
   def set_refresh_uuid
     self.refresh_uuid = SecureRandom.uuid_v7
+    self.last_active_at = Time.now
   end
 
   def nbf
