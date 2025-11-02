@@ -1,4 +1,4 @@
-json.extract! authentication, :id, :status, :created_at, :updated_at
+json.extract! authentication, :id, :status, :last_active_at, :created_at, :updated_at
 json.current authentication.id == Current.authentication_id
 
 browser = Browser.new(authentication.user_agent)
