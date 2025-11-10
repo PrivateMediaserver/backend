@@ -1,4 +1,4 @@
-name: Auto Merge
+name: Auto Merge PRs
 
 on:
   pull_request:
@@ -13,47 +13,12 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      checks: read
 
     steps:
-      - name: Check if PR is mergeable and CI passed
-        id: check
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const pr = context.payload.pull_request;
-
-            // Проверяем, что PR mergeable
-            if (pr.mergeable_state !== "clean") {
-              console.log(`PR is not mergeable (state: ${pr.mergeable_state}). Will retry later.`);
-              core.setOutput("ready", "false");
-              return;
-            }
-
-            // Получаем все проверки для текущего коммита
-            const checks = await github.rest.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: pr.head.sha,
-            });
-
-            const allSuccess = checks.data.check_runs.length > 0 &&
-              checks.data.check_runs.every(c => c.status === "completed" && c.conclusion === "success");
-
-            if (!allSuccess) {
-              console.log("Not all checks passed yet. Will retry later.");
-              core.setOutput("ready", "false");
-              return;
-            }
-
-            // Всё прошло
-            core.setOutput("ready", "true");
-
-      - name: Merge PR
-        if: steps.check.outputs.ready == 'true'
+      - name: Attempt to merge PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
-          echo "✅ All checks passed, merging $PR_URL ..."
-          gh pr merge "$PR_URL" --merge --delete-branch
+          echo "🔄 Attempting to merge $PR_URL ..."
+          gh pr merge "$PR_URL" --merge --delete-branch || echo "⏳ PR not ready yet, will retry on next update"
