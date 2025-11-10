@@ -1,4 +1,4 @@
-name: Auto Merge PRs
+name: Auto Merge
 
 on:
   pull_request:
