@@ -13,27 +13,16 @@ class Video < ApplicationRecord
 
   validates :name, presence: true
 
-  before_update :normalize_progress
-
   generates_token_for :playlist, expires_in: 1.minute do
     updated_at
   end
 
-  def viewed
-    (progress / duration * 100) >= 90
-  end
-
-  def self.random_for_user(user)
-    relation = user.videos.where("progress < duration")
+  def self.random_unviewed_id_for_user(user)
+    relation = user.videos.where(viewed: false)
     count = relation.count
+
     return nil if count.zero?
 
-    relation.offset(rand(count)).first
-  end
-
-  private
-
-  def normalize_progress
-    self.progress = duration if progress_changed? && viewed
+    relation.offset(rand(count)).limit(1).pick(:id)
   end
 end
