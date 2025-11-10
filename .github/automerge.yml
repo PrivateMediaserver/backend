@@ -6,9 +6,7 @@ on:
 
 jobs:
   enable-auto-merge:
-    if: >
-      github.actor == 'dependabot[bot]' &&
-      contains(github.event.pull_request.labels.*.name, 'auto-merge')
+    if: contains(github.event.pull_request.labels.*.name, 'automerge')
     runs-on: [self-hosted, linux, arm64]
     permissions:
       contents: write
