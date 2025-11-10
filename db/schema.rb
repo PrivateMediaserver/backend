@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_02_120155) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_10_211826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -128,6 +128,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_02_120155) do
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id", null: false
+    t.virtual "viewed", type: :boolean, as: "((duration > (0)::double precision) AND (progress > (0)::double precision) AND ((progress / duration) >= (0.9)::double precision))", stored: true
     t.integer "width"
     t.index ["user_id"], name: "index_videos_on_user_id"
   end

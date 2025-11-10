@@ -31,7 +31,7 @@ class V1::VideosController < V1Controller
   end
 
   def random_id
-    render json: { id: Video.random_for_user(Current.user)&.id }
+    render json: { id: Video.random_unviewed_id_for_user(Current.user) }
   end
 
   def playlist
