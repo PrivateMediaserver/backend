@@ -7,6 +7,10 @@ class V1::VideosController < V1Controller
   def index
     videos = Current.user.videos.processed
 
+    if videos_query[:unviewed] == true
+      videos = videos.where(viewed: false)
+    end
+
     if videos_query[:person_ids].present?
       videos = videos.joins(video_people: :person)
                        .where(people: { id: videos_query[:person_ids] })
@@ -102,7 +106,7 @@ class V1::VideosController < V1Controller
   private
 
   def videos_query
-    params.permit(person_ids: [], tag_ids: [])
+    params.permit(:unviewed, person_ids: [], tag_ids: [])
   end
 
   def set_video
