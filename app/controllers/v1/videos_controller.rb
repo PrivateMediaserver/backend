@@ -7,7 +7,7 @@ class V1::VideosController < V1Controller
   def index
     videos = Current.user.videos.processed
 
-    if videos_query[:unviewed] == true
+    if videos_query[:unviewed] == "true"
       videos = videos.where(viewed: false)
     end
 
