@@ -16,6 +16,7 @@ gem "solid_cache"
 gem "solid_queue"
 gem "thruster", require: false
 gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "webauthn"
 
 group :development, :test do
   gem "brakeman", require: false
