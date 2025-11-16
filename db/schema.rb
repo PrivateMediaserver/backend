@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_10_211826) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_14_141923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_211826) do
     t.uuid "user_id", null: false
     t.index ["refresh_uuid"], name: "index_authentications_on_refresh_uuid", unique: true
     t.index ["user_id"], name: "index_authentications_on_user_id"
+  end
+
+  create_table "passkeys", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "credential_id", null: false
+    t.string "name"
+    t.binary "public_key", null: false
+    t.bigint "sign_count", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["credential_id"], name: "index_passkeys_on_credential_id", unique: true
+    t.index ["user_id"], name: "index_passkeys_on_user_id"
   end
 
   create_table "people", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -136,6 +148,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_211826) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "authentications", "users"
+  add_foreign_key "passkeys", "users"
   add_foreign_key "people", "users"
   add_foreign_key "screenshots", "videos"
   add_foreign_key "tags", "users"

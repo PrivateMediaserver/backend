@@ -11,6 +11,13 @@ Rails.application.routes.draw do
         delete "authentications/:id", action: :terminate
       end
 
+      controller :passkeys do
+        get "passkeys", action: :index
+        get "passkeys/:id", action: :show
+        post "passkeys/options", action: :options
+        post "passkeys", action: :create
+      end
+
       controller :user do
         get "user", action: :show
       end
