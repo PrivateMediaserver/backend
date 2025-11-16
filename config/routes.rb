@@ -6,16 +6,16 @@ Rails.application.routes.draw do
       controller :authentications do
         get "authentications", action: :index
         post "authentications", action: :create
+        post "authentications/passkey/options", action: :passkey_options
+        post "authentications/passkey", action: :create_with_passkey
         post "authentications/refresh", action: :refresh
         delete "authentications/sign-out", action: :destroy
         delete "authentications/:id", action: :terminate
       end
 
-      controller :passkeys do
-        get "passkeys", action: :index
-        get "passkeys/:id", action: :show
-        post "passkeys/options", action: :options
-        post "passkeys", action: :create
+      controller :passkey do
+        post "passkey/options", action: :options
+        post "passkey", action: :create
       end
 
       controller :user do

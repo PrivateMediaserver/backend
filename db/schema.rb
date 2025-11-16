@@ -57,13 +57,13 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_14_141923) do
   create_table "passkeys", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "credential_id", null: false
-    t.string "name"
     t.binary "public_key", null: false
     t.bigint "sign_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id", null: false
     t.index ["credential_id"], name: "index_passkeys_on_credential_id", unique: true
     t.index ["user_id"], name: "index_passkeys_on_user_id"
+    t.index ["user_id"], name: "index_passkeys_on_user_id_unique", unique: true
   end
 
   create_table "people", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :authentications, dependent: :destroy
-  has_many :passkeys, dependent: :destroy
+  has_one :passkey, dependent: :destroy
   has_many :videos, dependent: :destroy
   has_many :people, dependent: :destroy
   has_many :tags, dependent: :destroy
