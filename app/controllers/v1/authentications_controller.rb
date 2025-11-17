@@ -7,21 +7,14 @@ class V1::AuthenticationsController < V1Controller
     @authentications = Current.user.authentications.order(updated_at: :desc)
   end
 
-  def create
-    email, password = authentication_params
-    user = User.find_by(email:)
-
-    if user&.authenticate(password)
-      @authentication = user.authentications.create(user_agent:)
-    else
-      render json: { status: 401, error: "Unauthorized" }, status: :unauthorized
-    end
-  end
-
   def refresh
     if @authentication
-      @authentication.update(refresh_uuid: SecureRandom.uuid_v7, user_agent:, last_active_at: Time.now)
-      render :create, status: :created
+      @authentication.update(refresh_uuid: SecureRandom.uuid_v7,
+                             user_agent: request.user_agent,
+                             last_active_at: Time.now)
+
+      render json: { access_token: @authentication.access_token,
+                     refresh_token: @authentication.refresh_token }
     else
       render json: { status: 401, error: "Unauthorized" }, status: :unauthorized unless @authentication
     end
@@ -51,15 +44,7 @@ class V1::AuthenticationsController < V1Controller
     nil
   end
 
-  def authentication_params
-    params.expect(:email, :password)
-  end
-
   def refresh_token
     params.expect(:refresh_token)
-  end
-
-  def user_agent
-    request.user_agent
   end
 end

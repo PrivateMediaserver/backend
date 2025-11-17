@@ -5,10 +5,23 @@ Rails.application.routes.draw do
     namespace :v1 do
       controller :authentications do
         get "authentications", action: :index
-        post "authentications", action: :create
         post "authentications/refresh", action: :refresh
         delete "authentications/sign-out", action: :destroy
         delete "authentications/:id", action: :terminate
+      end
+
+      controller :authentications_base do
+        post "authentications/base", action: :create
+      end
+
+      controller :authentications_passkey do
+        post "authentications/passkey/options", action: :options
+        post "authentications/passkey", action: :create
+      end
+
+      controller :passkey do
+        post "passkey/options", action: :options
+        post "passkey", action: :create
       end
 
       controller :user do
