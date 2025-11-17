@@ -51,7 +51,7 @@ WebAuthn.configure do |config|
   #
   # config.rp_id = "example.com"
 
-  config.rp_id = ENV.fetch("APPLICATION_DOMAIN_SUFFIX")
+  config.rp_id = ENV.fetch("APPLICATION_DOMAIN")
 
   # Configure preferred binary-to-text encoding scheme. This should match the encoding scheme
   # used in your client-side (user agent) code before sending the credential to the server.
