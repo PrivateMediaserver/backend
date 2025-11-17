@@ -21,6 +21,8 @@ class V1::PasskeyController < V1Controller
       public_key: credential.public_key,
       sign_count: credential.sign_count,
     )
+  rescue => e
+    render json: { status: 422, error: e.message }, status: :unprocessable_entity
   end
 
   private

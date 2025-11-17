@@ -23,5 +23,7 @@ class V1::AuthenticationsPasskeyController < V1Controller
 
     render json: { access_token: @authentication.access_token,
                    refresh_token: @authentication.refresh_token }, status: :created
+  rescue => e
+    render json: { status: 422, error: e.message }, status: :unprocessable_entity
   end
 end
