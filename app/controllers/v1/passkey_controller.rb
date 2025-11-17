@@ -16,7 +16,8 @@ class V1::PasskeyController < V1Controller
 
     credential.verify(challenge)
 
-    @passkey = Current.user.create_passkey(
+    Current.user.passkey&.destroy
+    Current.user.create_passkey(
       credential_id: Base64.urlsafe_encode64(credential.raw_id),
       public_key: credential.public_key,
       sign_count: credential.sign_count,
