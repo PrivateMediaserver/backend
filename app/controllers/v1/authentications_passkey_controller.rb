@@ -6,8 +6,7 @@ class V1::AuthenticationsPasskeyController < V1Controller
   end
 
   def create
-    challenge = params.require(:challenge)
-    assertion = params.require(:assertion)
+    challenge, assertion = params.expect(:challenge, assertion: {})
 
     credential = WebAuthn::Credential.from_get(assertion)
     passkey = Passkey.find_by!(credential_id: Base64.urlsafe_encode64(credential.raw_id))
