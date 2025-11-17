@@ -5,7 +5,7 @@ WebAuthn.configure do |config|
   # you need your credentials to be bound to a single origin but you have more than one tenant, please see [our Advanced
   # Configuration section](https://github.com/cedarcode/webauthn-ruby/blob/master/docs/advanced_configuration.md)
   # instead of adding multiple origins.
-  config.allowed_origins = %w[https://pm.big.wtf http://localhost:5173]
+  config.allowed_origins = %w[https://pm.big.wtf http://localhost:4173 http://localhost:5173]
 
   # When operating within iframes or embedded contexts, you may need to restrict
   # which top-level origins are permitted to host WebAuthn ceremonies.
@@ -51,8 +51,7 @@ WebAuthn.configure do |config|
   #
   # config.rp_id = "example.com"
 
-  # TODO: use some variable (environment variable or environment config)
-  config.rp_id = "localhost"
+  config.rp_id = ENV.fetch("APPLICATION_DOMAIN_SUFFIX")
 
   # Configure preferred binary-to-text encoding scheme. This should match the encoding scheme
   # used in your client-side (user agent) code before sending the credential to the server.
