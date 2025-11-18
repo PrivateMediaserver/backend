@@ -28,8 +28,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          cache-from: type=registry,ref=mediaserver/backend:production-buildcache
-          cache-to: type=registry,ref=mediaserver/backend:production-buildcache,mode=max
+          cache-from: type=registry,ref=${{ vars.DOCKER_REGISTRY }}/mediaserver/backend:production-buildcache
+          cache-to: type=registry,ref=${{ vars.DOCKER_REGISTRY }}/mediaserver/backend:production-buildcache,mode=max
           platforms: linux/arm64
           push: true
           tags: ${{ vars.DOCKER_REGISTRY }}/mediaserver/backend:production
