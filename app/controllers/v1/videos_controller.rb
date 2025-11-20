@@ -65,7 +65,7 @@ class V1::VideosController < V1Controller
     @video = Current.user.videos.new(create_video_params)
 
     if @video.save
-      ProcessVideoJob.perform_later(@video.id)
+      ProcessVideoJob.perform_async(@video.id)
       render :show, status: :created
     else
       render json: { status: 422, error: "Unprocessable Content", fields: @video.errors }, status: :unprocessable_content

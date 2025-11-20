@@ -12,8 +12,8 @@ gem "pg", "~> 1.6"
 gem "puma", ">= 5.0"
 gem "rack-cors"
 gem "rails", "~> 8.1.1"
-gem "solid_cache"
-gem "solid_queue"
+gem "redis"
+gem "sidekiq"
 gem "thruster", require: false
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "webauthn"

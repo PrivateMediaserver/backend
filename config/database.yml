@@ -10,31 +10,12 @@ default: &default
   #min_messages: notice
 
 development:
-  primary: &primary_development
-    <<: *default
-    database: mediaserver_development
-  cache:
-    <<: *primary_development
-    database: mediaserver_development_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_development
-    database: mediaserver_development_queue
-    migrations_paths: db/queue_migrate
+  database: mediaserver_development
 
 test:
   <<: *default
   database: mediaserver_test
 
 production:
-  primary: &primary_production
-    <<: *default
-    database: mediaserver_production
-  cache:
-    <<: *primary_production
-    database: mediaserver_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: mediaserver_production_queue
-    migrations_paths: db/queue_migrate
+  <<: *default
+  database: mediaserver_production

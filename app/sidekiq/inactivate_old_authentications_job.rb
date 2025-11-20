@@ -1,5 +1,5 @@
-class InactivateOldAuthenticationsJob < ApplicationJob
-  queue_as :low
+class InactivateOldAuthenticationsJob
+  include Sidekiq::Job
 
   def perform
     authentications.find_each(&:expired!)

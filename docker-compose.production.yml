@@ -6,31 +6,14 @@ services:
       target: production
     env_file: .env
     ports:
-      - "13000:3000"
+      - "13000:80"
     deploy:
       replicas: 1
-    depends_on:
-      - postgresql
 
   worker:
     image: registry.big.wtf/mediaserver/backend:production
     env_file: .env
-    command: bundle exec rails solid_queue:start
-    deploy:
-      replicas: 1
-    depends_on:
-      - postgresql
-
-  postgresql:
-    image: postgres:18
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      PGDATA: /data
-    ports:
-      - "15432:5432"
-    volumes:
-      - postgresql:/data
+    command: bundle exec sidekiq -C config/myapp_sidekiq.yml
     deploy:
       replicas: 1
 

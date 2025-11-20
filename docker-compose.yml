@@ -14,17 +14,19 @@ services:
       replicas: 1
     depends_on:
       - postgresql
+      - redis
 
   worker:
     image: registry.big.wtf/mediaserver/backend:development
     env_file: .env
-    command: bundle exec rails solid_queue:start
+    command: bundle exec sidekiq -C config/myapp_sidekiq.yml
     volumes:
       - .:/rails
     deploy:
       replicas: 4
     depends_on:
       - postgresql
+      - redis
 
   postgresql:
     image: postgres:18
@@ -39,5 +41,16 @@ services:
     deploy:
       replicas: 1
 
+  redis:
+    image: redis:8
+    command: --save 60 1 --loglevel warning
+    ports:
+      - "16379:6379"
+    volumes:
+      - redis:/data
+    deploy:
+      replicas: 1
+
 volumes:
   postgresql:
+  redis:
