@@ -10,6 +10,7 @@ default: &default
   #min_messages: notice
 
 development:
+  <<: *default
   database: mediaserver_development
 
 test:

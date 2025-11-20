@@ -44,5 +44,9 @@ module Backend
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    config.session_store :cookie_store, key: "_mediaserver_session"
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
   end
 end

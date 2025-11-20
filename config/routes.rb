@@ -1,8 +1,14 @@
 require "sidekiq/web"
 
+Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+  secure_username = ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_USERNAME"]))
+  secure_password = ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
+  secure_username & secure_password
+end if Rails.env.production?
+
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
-  mount Sidekiq::Web => "/sidekiq" # TODO: protect
+  mount Sidekiq::Web => "/sidekiq"
 
   scope defaults: { format: :json } do
     namespace :v1 do

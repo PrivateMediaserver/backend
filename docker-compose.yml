@@ -19,7 +19,7 @@ services:
   worker:
     image: registry.big.wtf/mediaserver/backend:development
     env_file: .env
-    command: bundle exec sidekiq -C config/myapp_sidekiq.yml
+    command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - .:/rails
     deploy:
