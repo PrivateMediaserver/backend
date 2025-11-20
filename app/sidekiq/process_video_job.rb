@@ -1,5 +1,5 @@
-class ProcessVideoJob < ApplicationJob
-  queue_as :low
+class ProcessVideoJob
+  include Sidekiq::Job
 
   def perform(id)
     @video = Video.find(id)
