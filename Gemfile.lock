@@ -301,7 +301,6 @@ GEM
     stringio (3.1.8)
     thor (1.4.0)
     thruster (0.1.16)
-    thruster (0.1.16-aarch64-linux)
     thruster (0.1.16-arm64-darwin)
     timeout (0.4.4)
     tpm-key_attestation (0.14.1)
@@ -332,7 +331,6 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin
   ruby
 
