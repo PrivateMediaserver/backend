@@ -3,7 +3,7 @@ class V1::PasskeyController < V1Controller
 
   def options
     options = options_for_create
-    Rails.cache.write(options_cache_key, options.challenge) # TODO: add expiration
+    Rails.cache.write(options_cache_key, options.challenge, expires_in: 2.minutes)
 
     render json: options, status: :created
   end
