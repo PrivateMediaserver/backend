@@ -1,4 +1,5 @@
 require "sidekiq/web"
+require "sidekiq/cron/web"
 
 Sidekiq::Web.use Rack::Auth::Basic do |username, password|
   secure_username = ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_USERNAME"]))

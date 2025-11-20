@@ -1,0 +1,9 @@
+purge_unattached_blobs:
+  cron: "0 3 * * *"
+  class: "PurgeUnattachedBlobsJob"
+  queue: low
+
+inactivate_old_authentications:
+  cron: "*/5 * * * *"
+  class: "InactivateOldAuthenticationsJob"
+  queue: low

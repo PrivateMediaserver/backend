@@ -14,6 +14,7 @@ gem "rack-cors"
 gem "rails", "~> 8.1.1"
 gem "redis"
 gem "sidekiq"
+gem "sidekiq-cron"
 gem "thruster", require: false
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "webauthn"
