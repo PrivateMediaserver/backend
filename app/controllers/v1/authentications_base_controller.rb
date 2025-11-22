@@ -9,7 +9,10 @@ class V1::AuthenticationsBaseController < V1Controller
       render json: { access_token: @authentication.access_token,
                      refresh_token: @authentication.refresh_token }, status: :created
     else
-      render json: { status: 401, error: "Unauthorized" }, status: :unauthorized
+      render json: { status: 401,
+                     error: "Unauthorized",
+                     message: I18n.t("controllers.v1.authentications_base.incorrect_credentials") },
+             status: :unauthorized
     end
   end
 
