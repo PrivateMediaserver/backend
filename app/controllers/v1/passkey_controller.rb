@@ -1,6 +1,10 @@
 class V1::PasskeyController < V1Controller
   before_action :authorize
 
+  def show
+    @passkey = Current.user.passkey
+  end
+
   def options
     options = options_for_create
     Rails.cache.write(options_cache_key, options.challenge, expires_in: 2.minutes)
@@ -24,6 +28,10 @@ class V1::PasskeyController < V1Controller
     )
   rescue => e
     render json: { status: 422, error: e.message }, status: :unprocessable_entity
+  end
+
+  def destroy
+    Current.user.passkey&.destroy
   end
 
   private
