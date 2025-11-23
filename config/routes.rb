@@ -30,8 +30,10 @@ Rails.application.routes.draw do
       end
 
       controller :passkey do
+        get "passkey", action: :show
         post "passkey/options", action: :options
         post "passkey", action: :create
+        delete "passkey", action: :destroy
       end
 
       controller :user do
