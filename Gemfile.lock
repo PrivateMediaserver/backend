@@ -200,9 +200,9 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
-    pg (1.6.2)
-    pg (1.6.2-aarch64-linux)
-    pg (1.6.2-arm64-darwin)
+    pg (1.6.3-aarch64-linux)
+    pg (1.6.3-arm64-darwin)
+    pg (1.6.3-x86_64-linux)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -318,6 +318,7 @@ GEM
     thor (1.4.0)
     thruster (0.1.17-aarch64-linux)
     thruster (0.1.17-arm64-darwin)
+    thruster (0.1.17-x86_64-linux)
     timeout (0.6.0)
     tpm-key_attestation (0.14.1)
       bindata (~> 2.4)
@@ -350,6 +351,7 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3
